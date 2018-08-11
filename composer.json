@@ -4,7 +4,6 @@
     "keywords": ["framework"],
     "homepage": "http://phphoenix.com",
     "type": "library",
-    "license": "BSD",
     "authors": [
         {
             "name": "Roman Tsiupa",
