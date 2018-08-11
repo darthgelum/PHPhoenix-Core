@@ -130,7 +130,7 @@ class View
         include ($file);
         $template = ob_get_clean();
         ob_start();
-        $template = strtr( $template, array('{' => '<?= ','}' => ' ?>'));
+        $template = strtr( $template, array('{{' => '<?= ','}}' => ' ?>'));
          eval(' ?>'.$template.'<?php ');
         $rendered = ob_get_clean();
         return $rendered;
@@ -158,7 +158,7 @@ class View
         include($this->path);
         $template = ob_get_clean();//file_get_contents($this->path);
         ob_start();
-        $template = strtr( $template, array('{' => "<?=",'}' => "?>"));
+        $template = strtr( $template, array('{{' => "<?=",'}}' => "?>"));
         eval(' ?>'.$template.'<?php ');
 		//include($this->path);
         $result = ob_get_clean();
