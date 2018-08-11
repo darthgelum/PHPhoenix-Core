@@ -1,10 +1,9 @@
 {
     "name": "phphoenix/core",
     "description": "PHPhoenix Framework",
-    "require": {
-        "php": "^5.3.3 || ^7.0"
-    },
-    "homepage": "https://github.com/darthgelum/PHPhoenix",
+    "keywords": ["framework"],
+    "homepage": "http://phphoenix.com",
+    "type": "library",
     "license": "BSD",
     "authors": [
         {
@@ -18,4 +17,15 @@
             "homepage": "http://increw.ru"
         }
     ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {"PHPhoenix": "classes/"}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.*-dev"
+        }
+    }
 }
