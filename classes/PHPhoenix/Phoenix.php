@@ -208,7 +208,8 @@ class Phoenix {
 
     public function find_root_file($subfolder, $name, $extension = 'php', $return_all = false)
     {
-        $fname = $name.'.'.$extension;
+        $fname = $extension?$name.'.'.$extension:$name;
+
         $found_files = array();
 
         $file = $this->root_dir.$subfolder.'/'.$fname;
