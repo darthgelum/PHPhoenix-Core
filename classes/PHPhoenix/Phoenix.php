@@ -2,6 +2,8 @@
 
 namespace PHPhoenix;
 
+use PHPhoenix\Helpers\Str;
+
 /**
  * The core of the framework and it's dependancy container.
  * It holds references to all framework wide instances, like Config,
@@ -65,6 +67,12 @@ class Phoenix {
      * @var string
      */
     public $basepath = '/';
+
+    /**
+     * Config variables declared in config/.env
+     * @var array
+     */
+    protected $env_vars;
 
     /**
      * Gets a property by name. Returns defined class and module instances
@@ -311,9 +319,49 @@ class Phoenix {
             $this->$name = new $class($this);
         }
 
+        $conf_file = $this->find_root_file("config",".env","");
+
+        $conf_file = array_filter(explode("\n",file_get_contents($conf_file)));
+        foreach ($conf_file as $item)
+        {
+            $item = explode("=", $item);
+            $this->env_vars[trim($item[0])] = trim($item[1]);
+        }
+
         $this->after_bootstrap();
 
         return $this;
+    }
+    /**
+     * Method for getting env variables
+     *
+     * @return string
+     */
+    public function env($key, $default = null)
+    {
+
+        $value = $this->env_vars[$key];
+        if ($value === false) {
+            return $default;
+        }
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+        if (Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
+            return substr($value, 1, -1);
+        }
+        return $value;
     }
 
     /**
