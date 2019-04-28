@@ -14,7 +14,7 @@ class Controller
 	 * Phoenix Dependancy Container
 	 * @var \PHPhoenix\Phoenix
 	 */
-	protected $phoenix;
+	public $phoenix;
 	
 	/**
 	 * Request for this controller. Holds all input data.
